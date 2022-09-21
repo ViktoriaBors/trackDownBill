@@ -6,7 +6,7 @@ import bcrypt from "bcryptjs"
 // server
 const server = express()
 
-// middlewares
+// middlewares 
 server.use(express.static("public"))
 server.use(express.json())
 
@@ -82,8 +82,6 @@ server.post("/user/registration", async (req,res)=>{
         password: hash
     }).then(result => res.send(result))
 })
-
-
 
 //////////// PROJECT ROUTES ///////////
 // get all ongoing projects for the specific user
