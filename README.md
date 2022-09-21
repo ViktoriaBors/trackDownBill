@@ -29,9 +29,3 @@ COMING SOON.
 COMING SOON (but hopefully tons of React and good practice of NodeJS)
 
 ## Deployed: in the future
-
-<<<<<<< HEAD
-
-=======
- 
->>>>>>> d7313577d8e1fc44e02449199374892320e40557
