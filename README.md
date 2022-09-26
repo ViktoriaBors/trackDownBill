@@ -11,7 +11,7 @@ Buying materials in shop or online and not really able to track the money... So 
 It is going to be a CRUD app with database connection. 
 
 ### **_Used Technologies_**
-1. React front end hopefully
+1. VUE front end hopefully
 2. Node Js / Express JS
 3. MongoDB
 
@@ -19,7 +19,7 @@ It is going to be a CRUD app with database connection.
 
 Of course to help to track the bills, but it is also a practice project to get more hands-on experience with NodeJS. I really liked to build back end during the **SpaceRock** project and I would like to continue to expand my back end (Node JS) knowledge. 
 
-Other big mission is to build this with React framework, what I am currently learning. 
+Other big mission is to build this with Vue framework, what I am currently learning. 
 
 **Challenges within the Project**
 
