@@ -1,89 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Track Down Bill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <nav>NAVBAR
-        <ul>
-            <li>Overview (of projects as a main page in the dashboard after login)</li>
-            <li>Logout</li>
-        </ul>
+
+<body class="font-serif text-sm">
+    <!-- Navbar -->
+    <nav class="
+        relative
+        w-full
+        flex flex-wrap
+        items-center
+        justify-between
+        py-4
+        bg-gray-100
+        text-gray-500
+        hover:text-gray-700
+        focus:text-gray-700
+        shadow-lg
+        navbar navbar-expand-md navbar-light
+        ">
+        <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+            <button class="
+            navbar-toggler
+            text-gray-500
+            border-0
+            hover:shadow-none hover:no-underline
+            py-2
+            px-2.5
+            bg-transparent
+            focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
+          " type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="w-6" role="img"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path fill="currentColor"
+                        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z">
+                    </path>
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse flex-grow items-center justify-between" id="navbarContent">
+                <p class="text-xl text-black">Welcome</p>
+                <!-- Left links -->
+                <ul class="navbar-nav flex flex-col justify-end pl-0 list-style-none text-lg">
+                    <li class="nav-item pr-2">
+                        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
+                            href="#">Register</a>
+                    </li>
+                    <li class="nav-item pr-2">
+                        <a class="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="#">Login</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
     </nav>
+    <!-- Navbar -->
 
-    <section>
-        <button id="newProject">Add new Project</button>
-        Form appears in the next section
+    <main>
+        <!-- Background image -->
+        <div class="p-12 text-center relative overflow-hidden bg-no-repeat bg-cover h-screen opacity-60"
+            style="background-image: url('img/pexels-karolina-grabowska-4386373.jpg')">
+            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
+                style="background-color: rgba(2, 56, 53, 0.7)">
+                <section id="content" class="flex flex-col justify-center items-center h-1/2">
+                    <!-- Content for index                             
+                              <div class="text-white mx-4">
+                                <h2 class="font-semibold text-5xl uppercase mb-4">
+                                  Track Down Bill
+                                </h2>
+                                <h4 class="font-semibold text-xl mb-6">
+                                 A tracking app for your expenses
+                                </h4>
+                                <p class="text-gray-200 font-medium text-sm leading-snug uppercase">Register or login to see your projects and its cost</p>
+                              </div>
+                              -->
 
-        <section>Form of new project
-            <form>
-                <label for="projectNameNew">Name of the project</label>
-                <input type="text" id="projectNameNew" name="projectNameNew">
-                <br>
-                <label for="projectTypeNew">Type of the project</label>
-                <input type="text" name="projectTypeNew" id="projectTypeNew" placeholder="renovation, food etc">
-                <br>
-                <button id="submitProjectNew" type="button">Submit</button>
-            </form>
-        </section>
+                    <!-- Register Form 
+                    <h2 class="text-lg text-white my-4 leading-snug font-bold">Register below to start up and track your expenses</h2>
+                    <div class="block p-6 rounded-lg shadow-lg bg-white md:w-96 opacity-90 border-4 border-teal-900">
+                        <form>
+                            <div class="form-group mb-6">
+                                <input type="text"
+                                    class="form-control
+                                                            block
+                                                            w-full
+                                                            px-3
+                                                            py-1.5
+                                                            text-base
+                                                            font-normal
+                                                            text-gray-700
+                                                            bg-white bg-clip-padding
+                                                            border border-solid border-gray-300
+                                                            rounded
+                                                            transition
+                                                            ease-in-out
+                                                            m-0
+                                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="firstName" aria-describedby="firstName" placeholder="First name">
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="text"
+                                    class="form-control
+                                                            block
+                                                            w-full
+                                                            px-3
+                                                            py-1.5
+                                                            text-base
+                                                            font-normal
+                                                            text-gray-700
+                                                            bg-white bg-clip-padding
+                                                            border border-solid border-gray-300
+                                                            rounded
+                                                            transition
+                                                            ease-in-out
+                                                            m-0
+                                                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="lastName" aria-describedby="lastName" placeholder="Last name">
+                            </div>
 
-        list of ongoing projects - card type with sum 
-        <form>
-            <label for="projectName">Name of the project</label>
-            <input type="text" id="projectName" name="projectName">
-            <br>
-            <label for="projectType">Type of the project</label>
-            <input type="text" name="projectType" id="projectType" placeholder="renovation, food etc">
-            <br>
-            <button id="moreDetails">See more</button>
-            <button id="updateProject" type="button">Update</button>
-            <button id="deleteProject" type="button">Delete</button>
-        </form>
-    </section>
+                            <div class="form-group mb-6">
+                                <input type="email"
+                                    class="form-control block
+                                                          w-full
+                                                          px-3
+                                                          py-1.5
+                                                          text-base
+                                                          font-normal
+                                                          text-gray-700
+                                                          bg-white bg-clip-padding
+                                                          border border-solid border-gray-300
+                                                          rounded
+                                                          transition
+                                                          ease-in-out
+                                                          m-0
+                                                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="emailReg" placeholder="Email address">
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="password"
+                                    class="form-control block
+                                                          w-full
+                                                          px-3
+                                                          py-1.5
+                                                          text-base
+                                                          font-normal
+                                                          text-gray-700
+                                                          bg-white bg-clip-padding
+                                                          border border-solid border-gray-300
+                                                          rounded
+                                                          transition
+                                                          ease-in-out
+                                                          m-0
+                                                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="passwordReg" placeholder="Password">
+                            </div>
+                            <button type="submit" class="
+                                                        w-full
+                                                        px-6
+                                                        py-2.5
+                                                        bg-teal-600
+                                                        text-white
+                                                        font-medium
+                                                        text-xs
+                                                        leading-tight
+                                                        uppercase
+                                                        rounded
+                                                        shadow-md
+                                                        hover:bg-teal-700 hover:shadow-lg
+                                                        focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0
+                                                        active:bg-teal-800 active:shadow-lg
+                                                        transition
+                                                        duration-150
+                                                        ease-in-out">Register</button>
+                        </form>
+                    </div>
+                    -->
 
-    <div>Form of the detail part</div>
-    <div> Add new item
-        <label for="detailNameNew">Shop name</label>
-        <input type="text" name="detailNameNew" id="detailNameNew">
-        <br>
-        <label for="detailSumNew">Sum of the bill</label>
-        <input type="number" name="detailSumNew" id="detailSumNew">
-        <button id="submitBillNew">Add</button>
-    </div>
-    <div> Change old item
-        <label for="detailName">Shop name</label>
-        <input type="text" name="detailName" id="detailName">
-        <br>
-        <label for="detailSum">Sum of the bill</label>
-        <input type="number" name="detailSum" id="detailSum">
-        <button id="updateBill" type="button">Update</button>
-        <button id="deleteBill" type="button">Delete</button>
-    </div>
+                    <!--Login Form   
+                    <h2 class="text-lg text-white my-4 leading-snug font-bold">Login to get access to your expenses</h2>
+                    <div class="block p-6 rounded-lg shadow-lg bg-white md:w-96 opacity-90 border-4 border-teal-900">
+                        <form>
+                            <div class="form-group mb-6">
+                                <input type="email"
+                                    class="form-control block
+                                                          w-full
+                                                          px-3
+                                                          py-1.5
+                                                          text-base
+                                                          font-normal
+                                                          text-gray-700
+                                                          bg-white bg-clip-padding
+                                                          border border-solid border-gray-300
+                                                          rounded
+                                                          transition
+                                                          ease-in-out
+                                                          m-0
+                                                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="email" placeholder="Email address">
+                            </div>
+                            <div class="form-group mb-6">
+                                <input type="password"
+                                    class="form-control block
+                                                          w-full
+                                                          px-3
+                                                          py-1.5
+                                                          text-base
+                                                          font-normal
+                                                          text-gray-700
+                                                          bg-white bg-clip-padding
+                                                          border border-solid border-gray-300
+                                                          rounded
+                                                          transition
+                                                          ease-in-out
+                                                          m-0
+                                                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    id="password" placeholder="Password">
+                            </div>
+                            <button type="submit" class="
+                                                        w-full
+                                                        px-6
+                                                        py-2.5
+                                                        bg-teal-600
+                                                        text-white
+                                                        font-medium
+                                                        text-xs
+                                                        leading-tight
+                                                        uppercase
+                                                        rounded
+                                                        shadow-md
+                                                        hover:bg-teal-700 hover:shadow-lg
+                                                        focus:bg-teal-700 focus:shadow-lg focus:outline-none focus:ring-0
+                                                        active:bg-teal-800 active:shadow-lg
+                                                        transition
+                                                        duration-150
+                                                        ease-in-out">Login</button>
+                        </form>
+                    </div>
+                   -->
+                </section>
+            </div>
+        </div>
+        <!-- Background image -->
+    </main>
 
-    <div>Returned items </div>
-    <div> Add new returned item
-        <label for="returnedNameNew">Shop name</label>
-        <input type="text" name="returnedNameNew" id="returnedNameNew">
-        <br>
-        <label for="returnedSumNew">Sum of the bill</label>
-        <input type="number" name="returnedSumNew" id="eturnedSumNew">
-        <button id="returnedBillNew">Add</button>
-    </div>
-
-    <div> older returned item
-        <label for="returnedName">Shop name</label>
-        <input type="text" name="returnedName" id="returnedName">
-        <br>
-        <label for="returnedSum">Sum of the bill</label>
-        <input type="number" name="returnedSum" id="eturnedSum">
-        <button id="returnedBillNew">Add</button>
-        <button id="updateReturned" type="button">Update</button>
-        <button id="deleteReturned" type="button">Delete</button>
-    </div>
-
-    <script src="script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
+
 </html>
