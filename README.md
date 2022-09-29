@@ -26,6 +26,6 @@ Other big mission is to build this with Vue framework, what I am currently learn
 COMING SOON.
 
 ## **_What have I learned_**
-COMING SOON (but hopefully tons of React and good practice of NodeJS)
+COMING SOON (but hopefully tons of Vue and good practice of NodeJS)
 
 ## Deployed: in the future
