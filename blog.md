@@ -12,4 +12,5 @@ Design ideas
 I started to think about the design and hard-coded to the html. I tried to make the design thinking in COMPONENTS, what I can use later for the framework to set up templates. 
 
 **Day 6**
+
 I started the front-end side as a vue app project, therefore I separated the project in 2 folder. One for back-end and one for Vue front-end. Right now the 2 side runs on separate localhost too. I implemented some basic view models and routes in the Vue app. Next step is to take the view parts to more smaller components. 
