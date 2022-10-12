@@ -14,3 +14,7 @@ I started to think about the design and hard-coded to the html. I tried to make 
 **Day 6**
 
 I started the front-end side as a vue app project, therefore I separated the project in 2 folder. One for back-end and one for Vue front-end. Right now the 2 side runs on separate localhost too. I implemented some basic view models and routes in the Vue app. Next step is to take the view parts to more smaller components. 
+
+**Day 7**
+
+I made the registration and login to work with the database. After that it redirects to another view (dahsboard). I need to find out how I can save and "send" some data from one view to another view as a next step

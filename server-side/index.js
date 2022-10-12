@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import {MongoClient, ObjectId} from "mongodb"
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from "bcryptjs"
@@ -7,8 +8,8 @@ import bcrypt from "bcryptjs"
 const server = express()
 
 // middlewares 
-server.use(express.static("public"))
 server.use(express.json())
+server.use(cors())
 
 // connect to mongodb
 const client = new MongoClient("mongodb://localhost:27017")
@@ -45,10 +46,10 @@ server.post("/user/login", async (req,res) => {
         const expiration = new Date(Date.now()+86400000)
         console.log(expiration) 
         res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
-        res.send("Login is successful")
+        res.send(JSON.stringify("Login is successful"))
     } else {
         res.status(401)
-        res.send("Authorization is denied")
+        res.send(JSON.stringify("Authorization is denied"))
     }    
 })
 
@@ -65,14 +66,14 @@ server.post("/user/registration", async (req,res)=>{
     let user = await userDb.findOne({email: req.body.email})
     if(user){
         res.status(401)
-        res.send("User is already existing")
+        res.send(JSON.stringify(("User is already existing")))
         return
     }
     // session
-    const sessionId = uuidv4();
-    const expiration = new Date(Date.now()+86400000)
-    console.log(expiration) 
-    res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
+    //const sessionId = uuidv4();
+    //const expiration = new Date(Date.now()+86400000)
+   // console.log(expiration) 
+    //res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
     // password hash
     const hash = bcrypt.hashSync(req.body.password, 10);
     userDb.insertOne({

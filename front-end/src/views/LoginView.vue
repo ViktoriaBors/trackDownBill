@@ -4,7 +4,7 @@
                     <div class="block p-6 rounded-lg shadow-lg bg-white md:w-96 opacity-90 border-4 border-teal-900">
                         <form>
                             <div class="form-group mb-6">
-                                <input type="email"
+                                <input type="email" v-model="email"
                                     class="form-control block
                                                           w-full
                                                           px-3
@@ -22,7 +22,7 @@
                                     id="email" placeholder="Email address">
                             </div>
                             <div class="form-group mb-6">
-                                <input type="password"
+                                <input type="password" v-model="password"
                                     class="form-control block
                                                           w-full
                                                           px-3
@@ -39,7 +39,7 @@
                                                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="password" placeholder="Password">
                             </div>
-                            <button type="submit" @click.prevent="redirect" class="
+                            <button type="submit" @click.prevent="login" class="
                                                         w-full
                                                         px-6
                                                         py-2.5
@@ -63,9 +63,44 @@
 </template>
 
 <script setup>
+import { ref} from 'vue'
+
    function redirect() {
     window.location.href = "http://localhost:8080/dashboard"
     }
+
+    const email = ref("")
+    const password = ref("")
+
+    function login (){
+        console.log("login user")
+        console.log(email.value)
+        fetch("http://localhost:8000/user/login", {
+            method: "POST",
+            headers: {
+            'Content-Type': 'application/json',
+        },
+            body: JSON.stringify({
+                email: email.value,
+                password: password.value
+                })
+        }).then(res => {
+            if(!res.ok){
+                throw new Error
+                }
+            else {res.json()}
+        })
+        .then(data => {
+            email.value = ""
+            password.value = ""
+            console.log(data)
+
+        window.location.href = "http://localhost:8080/dashboard"
+        }).catch(error => {
+            alert("user cannot found")
+        })
+    }
+
 </script>
 
 <style>

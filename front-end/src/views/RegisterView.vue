@@ -4,7 +4,7 @@
                     <div class="block p-6 rounded-lg shadow-lg bg-white md:w-96 opacity-90 border-4 border-teal-900">
                         <form>
                             <div class="form-group mb-6">
-                                <input type="text"
+                                <input type="text" v-model="firstName"
                                     class="form-control
                                                             block
                                                             w-full
@@ -23,7 +23,7 @@
                                     id="firstName" aria-describedby="firstName" placeholder="First name">
                             </div>
                             <div class="form-group mb-6">
-                                <input type="text"
+                                <input type="text" v-model="lastName"
                                     class="form-control
                                                             block
                                                             w-full
@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="form-group mb-6">
-                                <input type="email"
+                                <input type="email" v-model="newEmail"
                                     class="form-control block
                                                           w-full
                                                           px-3
@@ -61,7 +61,7 @@
                                     id="emailReg" placeholder="Email address">
                             </div>
                             <div class="form-group mb-6">
-                                <input type="password"
+                                <input type="password" v-model="newPass"
                                     class="form-control block
                                                           w-full
                                                           px-3
@@ -78,7 +78,7 @@
                                                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     id="passwordReg" placeholder="Password">
                             </div>
-                            <button @click.prevent="redirect" type="submit" class="
+                            <button @click.prevent="register" type="submit" class="
                                                         w-full
                                                         px-6
                                                         py-2.5
@@ -102,9 +102,50 @@
 </template>
 
 <script setup>
+import { ref} from 'vue'
+
+
    function redirect() {
     window.location.href = "http://localhost:8080/dashboard"
     }
+
+const firstName = ref("")
+const lastName = ref("")
+const newEmail = ref("")
+const newPass = ref("")
+
+    function register (){
+        console.log("register new user")
+        fetch("http://localhost:8000/user/registration", {
+            method: "POST",
+            headers: {
+            'Content-Type': 'application/json',
+        },
+            body: JSON.stringify({
+                firstName : firstName.value,
+                lastName : lastName.value,
+                email: newEmail.value,
+                password: newPass.value
+                })
+        }).then(res => {
+            if(!res.ok){
+                throw new Error
+                }
+            else {res.json()}
+        })
+        .then(data => {
+            firstName.value = ""
+            lastName.value = ""
+            newEmail.value = ""
+            newPass.value = ""
+            console.log(data)
+
+        window.location.href = "http://localhost:8080/dashboard"
+        }).catch(error => {
+            alert("user already existing")
+        })
+    }
+
 </script>
 
 <style>

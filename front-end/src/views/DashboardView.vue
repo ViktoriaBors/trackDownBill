@@ -156,6 +156,7 @@
 </template>
 
 <script setup>
+
    function redirect() {
     window.location.href = "http://localhost:8080/details"
     }
