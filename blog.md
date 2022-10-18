@@ -18,3 +18,9 @@ I started the front-end side as a vue app project, therefore I separated the pro
 **Day 7**
 
 I made the registration and login to work with the database. After that it redirects to another view (dahsboard). I need to find out how I can save and "send" some data from one view to another view as a next step
+
+**Day 8 **
+
+So my frontend and backend does not run on the same localhost server. That is a problem when I need to send http requests. Luckily I found that I can use the cors middleware, so the request came through. Before I was not sure about how I want to track the user (cookies or session storage or token). I sticked with the cookie option as I have some experience with that. So I thought... I remembered to get cookieParser package and so started the setup. But because of the cors problem, I could not send cookie back. I found a solution to set credentials to true inside the cors. Now everything works again :)
+
+Next check if the user has a session at the dashboard view. I think here I need to use some lifecycle hook. 

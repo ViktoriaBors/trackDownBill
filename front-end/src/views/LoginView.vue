@@ -77,6 +77,7 @@ import { ref} from 'vue'
         console.log(email.value)
         fetch("http://localhost:8000/user/login", {
             method: "POST",
+            credentials: 'include',
             headers: {
             'Content-Type': 'application/json',
         },

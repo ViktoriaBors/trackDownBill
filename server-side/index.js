@@ -3,13 +3,15 @@ import cors from "cors"
 import {MongoClient, ObjectId} from "mongodb"
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from "bcryptjs"
+import cookieParser from "cookie-parser"
 
 // server
 const server = express()
 
 // middlewares 
+server.use(cors({credentials: true, origin: 'http://localhost:8080'}))
 server.use(express.json())
-server.use(cors())
+server.use(cookieParser())
 
 // connect to mongodb
 const client = new MongoClient("mongodb://localhost:27017")
@@ -42,10 +44,13 @@ server.post("/user/login", async (req,res) => {
     }
     // check hashed password matches
     if(bcrypt.compareSync(req.body.password, user.password)){
-        const sessionId = uuidv4();
         const expiration = new Date(Date.now()+86400000)
-        console.log(expiration) 
-        res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
+        if(user.expiration > expiration){
+            const sessionId = uuidv4();
+            userDb.updateOne({email:req.body.email}, {$set: {session:sessionId, expires:expiration, httpOnly: true}})
+            res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
+            res.send(JSON.stringify("Login is successful"))
+        }
         res.send(JSON.stringify("Login is successful"))
     } else {
         res.status(401)
@@ -70,17 +75,19 @@ server.post("/user/registration", async (req,res)=>{
         return
     }
     // session
-    //const sessionId = uuidv4();
-    //const expiration = new Date(Date.now()+86400000)
+    const sessionId = uuidv4();
+    const expiration = new Date(Date.now()+86400000)
    // console.log(expiration) 
-    //res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
-    // password hash
+   res.cookie("session", sessionId, {expires:  expiration, httpOnly: true}) // session is valid for a day
+   // password hash
     const hash = bcrypt.hashSync(req.body.password, 10);
     userDb.insertOne({
         firstName : req.body.firstName,
         lastName : req.body.lastName,
         email: req.body.email,
-        password: hash
+        password: hash,
+        session: sessionId,
+        expires : expiration
     }).then(result => res.send(result))
 })
 

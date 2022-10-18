@@ -118,6 +118,7 @@ const newPass = ref("")
         console.log("register new user")
         fetch("http://localhost:8000/user/registration", {
             method: "POST",
+            credentials: 'include',
             headers: {
             'Content-Type': 'application/json',
         },
