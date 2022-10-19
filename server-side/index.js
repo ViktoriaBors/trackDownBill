@@ -9,9 +9,9 @@ import cookieParser from "cookie-parser"
 const server = express()
 
 // middlewares 
-server.use(cors({credentials: true, origin: 'http://localhost:8080'}))
 server.use(express.json())
 server.use(cookieParser())
+server.use(cors({credentials: true, origin: ['http://192.168.1.172:8080', 'http://localhost:8080']}))
 
 // connect to mongodb
 const client = new MongoClient("mongodb://localhost:27017")
@@ -37,6 +37,7 @@ password: smth
 server.post("/user/login", async (req,res) => {
     console.log("user login")
     let user = await userDb.findOne({email: req.body.email})
+    console.log(user.expires, new Date(Date.now()))
     if(!user){
         res.status(401)
         res.send("User cannot found")
@@ -44,14 +45,17 @@ server.post("/user/login", async (req,res) => {
     }
     // check hashed password matches
     if(bcrypt.compareSync(req.body.password, user.password)){
-        const expiration = new Date(Date.now()+86400000)
-        if(user.expiration > expiration){
+        if(user.expiration < new Date(Date.now())){
+            console.log('session expired')
             const sessionId = uuidv4();
+            const expiration = new Date(Date.now()+86400000)
             userDb.updateOne({email:req.body.email}, {$set: {session:sessionId, expires:expiration, httpOnly: true}})
             res.cookie("session", sessionId, {expires:  expiration}) // session is valid for a day
             res.send(JSON.stringify("Login is successful"))
+        } else {
+            console.log('session not expired')
+            res.send(JSON.stringify("Login is successful"))
         }
-        res.send(JSON.stringify("Login is successful"))
     } else {
         res.status(401)
         res.send(JSON.stringify("Authorization is denied"))
@@ -89,6 +93,23 @@ server.post("/user/registration", async (req,res)=>{
         session: sessionId,
         expires : expiration
     }).then(result => res.send(result))
+})
+
+server.get('/user/session', async (req,res)=>{
+    console.log('checking for session')
+    const sessionId = req.cookies.session
+    let userSession = await userDb.findOne({session: sessionId})
+    if(!userSession || userSession.expires < new Date(Date.now())){
+        res.status(401)
+        res.send(JSON.stringify('No session found'))
+        return
+    } else {
+        res.send(JSON.stringify({
+            email:userSession.email,
+            firstName: userSession.firstName,
+            lastName : userSession.lastName
+        }))
+    }
 })
 
 //////////// PROJECT ROUTES ///////////

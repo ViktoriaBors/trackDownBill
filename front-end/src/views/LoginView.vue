@@ -74,11 +74,13 @@ import { ref} from 'vue'
 
     function login (){
         console.log("login user")
-        console.log(email.value)
+        console.log(email.value, password.value)
         fetch("http://localhost:8000/user/login", {
             method: "POST",
             credentials: 'include',
+            mode: "cors",
             headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
             body: JSON.stringify({
