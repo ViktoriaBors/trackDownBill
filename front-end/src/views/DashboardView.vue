@@ -116,27 +116,10 @@
 </template>
 
 <script setup>
-import {onMounted} from "vue"
+
 function redirect() {
   window.location.href = "http://localhost:8080/details";
 }
-
-onMounted(() => {
-  fetch("http://localhost:8000/user/session", {
-    credentials: "include",
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("error");
-      } else return res.json();
-    })
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      alert("no session");
-    });
-});
 </script>
 
 <style></style>

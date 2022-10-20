@@ -45,7 +45,7 @@ server.post("/user/login", async (req,res) => {
     }
     // check hashed password matches
     if(bcrypt.compareSync(req.body.password, user.password)){
-        if(user.expiration < new Date(Date.now())){
+        if(user.expiration < new Date(Date.now()) || user.expiration == null || user.session == null){
             console.log('session expired')
             const sessionId = uuidv4();
             const expiration = new Date(Date.now()+86400000)
@@ -109,6 +109,21 @@ server.get('/user/session', async (req,res)=>{
             firstName: userSession.firstName,
             lastName : userSession.lastName
         }))
+    }
+})
+
+server.get('/user/logout', async (req, res) => {
+    console.log('logging out')
+    const sessionId = req.cookies.session
+    let userSession = await userDb.findOne({session: sessionId})
+    if(userSession){
+        console.log('user found')
+        userDb.updateOne({session:sessionId}, {$set: {session:null, expires:null, httpOnly: true}})
+        res.send(JSON.stringify('user is logged out'))
+    } else {
+        console.log('problem')
+        res.status(401)
+        res.send(JSON.stringify('No session found'))
     }
 })
 
