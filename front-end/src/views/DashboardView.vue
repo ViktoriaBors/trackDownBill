@@ -8,9 +8,10 @@
     </h2>
     <div
       class="projectContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
-      >   
-    <ProjectCard :projects="projects.value"></ProjectCard>
-
+      >
+      <span v-for="project in projects" :key="project._id" >
+    <ProjectCard :project="project"></ProjectCard>
+      </span>
     </div>
 
     <button
@@ -42,15 +43,14 @@
                 aria-label="Select Project"
                 v-model="newProjectType"
               >
-                <option value="housing">Housing and Rent</option>
-                <option value="transportation">
-                  Transportation and Travel
+                <option value="Housing and Rent">Housing and Rent</option>
+                <option value="Transportation and Travel"> Transportation and Travel
                 </option>
-                <option value="food">Food and Groceries</option>
-                <option value="clothing">Clothing</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="renovation">Renovation</option>
-                <option value="other">Other</option>
+                <option value="Food and Groceries">Food and Groceries</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Renovation">Renovation</option>
+                <option value="Other">Other</option>
               </select>
             </div>
           </div>
@@ -77,20 +77,20 @@
 </template>
 
 <script setup>
-import {onMounted, onBeforeUpdate,ref} from "vue"
+import {onMounted,onUpdated, onBeforeUpdate,shallowRef, ref} from "vue"
 import ProjectCard from "../components/ProjectCard.vue"
 
 const props = defineProps(['isLoggedIn'])
 
 console.log(props.isLoggedIn)
 
+const projects= ref([])
+console.log(projects.value)
+
+
 const newProjectName = ref("")
 const newProjectType = ref("")
 const newProjectDescription = ref("")
-
-const projects= ref([])
-console.log(projects.value.length)
-
 
 const addProject = () => {
   let newProject = {
@@ -113,8 +113,8 @@ fetch("http://localhost:8000/project?email=test@test.com", {
       } else return res.json();
     })
     .then((data) => {
-      console.log(data)
       projects.value.push(data)
+      console.log(projects.value)
       newProjectName.value = ""
       newProjectType.value= ""
       newProjectDescription.value = ""
@@ -132,8 +132,12 @@ fetch("http://localhost:8000/project?email=test@test.com")
       } else return res.json();
     })
     .then((data) => {
-      console.log("mount")
       console.log(data)
+      console.log("mount")
+      data.forEach(element => {
+        projects.value.push(element)
+      });
+      console.log(projects.value)
     })
     .catch((error) => {
         console.log(error)
@@ -141,7 +145,7 @@ fetch("http://localhost:8000/project?email=test@test.com")
 });
 
 
-onBeforeUpdate ( () => {
+onUpdated ( () => {
   if(projects.value.length){
     fetch("http://localhost:8000/project?email=test@test.com")
         .then((res) => {
