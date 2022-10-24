@@ -13,17 +13,16 @@
                                   <router-link :to="{name:'login'}" class="text-lg hover:underline decoration-double"> Login</router-link>
                                      to see your projects and its cost</p>
                               </div>
+                              <p @click="a">hello</p>
   </div>
 </div>
 </template>
 
-<script>
+<script setup>
 
+const props = defineProps(['isLoggedIn'])
 
-export default {
-  name: 'HomeView',
-  components: {
-    
-  }
-}
+const a = ()=>{
+      console.log(props.isLoggedIn)
+    }
 </script>

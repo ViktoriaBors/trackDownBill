@@ -6,7 +6,7 @@
         <!-- Left links -->
         <ul class="flex flex-col justify-between items-center md:flex-row list-style-none">
           <li class="p-2">
-            <router-link to="/" class="text-xl text-black">Welcome <span v-if="isLoggedIn">{{user}}</span> </router-link>
+            <router-link to="/" :isLoggedIn="isLoggedIn" class="text-xl text-black">Welcome <span v-if="isLoggedIn">{{user}}</span> </router-link>
           </li>
            <li class=" p-2" v-if="!isLoggedIn">
             <router-link :to="{name:'register'}" class="text-xl text-black">Register</router-link>
@@ -15,7 +15,7 @@
             <router-link :to="{name:'login'}" class="text-xl text-black">Login</router-link>
           </li>
             <li class="p-2"  v-if="isLoggedIn">
-            <router-link :to="{name:'dashboard'}" class="text-xl text-black">Dashboard</router-link>
+            <router-link :to="{name:'dashboard'}"  :isLoggedIn="isLoggedIn" class="text-xl text-black">Dashboard</router-link>
           </li>
           <li class="p-2" v-if="isLoggedIn">
             <a @click="logout" class="cursor-pointer text-xl text-black">Log out</a>

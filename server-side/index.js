@@ -132,7 +132,7 @@ server.get('/user/logout', async (req, res) => {
 // fetch on the front end should look like http://localhost:8000/project?user=email
 server.get("/project", async (req,res)=>{
     console.log("getting all ongoing projects")
-    let user = req.query.user
+    let user = req.query.email
     // find all project under the specific user
     let projects = [];
     let project = await projectDb.find({updatedBy : user}).sort({name:1}) //sort by name
@@ -172,7 +172,7 @@ server.post("/project", async (req,res)=>{
         res.send("Project is already exist")
         return
     }
-    projectDb.insertOne(req.body).then(result => res.send("new project is added"))
+    projectDb.insertOne(req.body).then(result => res.send(JSON.stringify("new project is added")))
 })
 
 // update specific project

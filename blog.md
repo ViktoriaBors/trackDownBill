@@ -39,3 +39,9 @@ Next - writing out the personal welcome message.
 So no more cors problem! Yeess. Now I needed to figure out how to handle user login. I decided to make the navbar different - as a component and every time it gets mounted, it fetch data about the user (has session, email and name). Then I could make the navbar to look different if the user logged in and if not (v-if). 
 
 Only little thing is bothering me that if the user go to home page - even if he/she logged in - it says register or login. So thinking to change that to have a different message if the user is logged in already. Probably props needs to be used ?!
+
+**Day 11**
+
+So somehow I cannot figure out how to give props to one to another vue. I think the problem that they are not child-parent relationship... Other type of problem with the props is that I am not sure how to make the whole thing async...
+
+Good news I have made the add new project part and get all project. I just need to render it somehow, after I figure out props...
