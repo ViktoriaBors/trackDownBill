@@ -153,7 +153,9 @@ server.get("/project/:id", async (req,res)=>{
     let bills = [];
     let cursor = await billsDb.find({project : project.name})
     await cursor.forEach(result => bills.push(result))
-    res.send(bills)
+    if(bills.length == 0){
+        res.send(JSON.stringify(projectName))
+    } else res.send(bills)
 })
 
 // add new project on the database under a specific user
@@ -172,7 +174,7 @@ server.post("/project", async (req,res)=>{
         res.send("Project is already exist")
         return
     }
-    projectDb.insertOne(req.body).then(result => res.send(JSON.stringify("new project is added")))
+    projectDb.insertOne(req.body).then(result => res.send(JSON.stringify(req.body)))
 })
 
 // update specific project

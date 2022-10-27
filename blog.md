@@ -45,3 +45,14 @@ Only little thing is bothering me that if the user go to home page - even if he/
 So somehow I cannot figure out how to give props to one to another vue. I think the problem that they are not child-parent relationship... Other type of problem with the props is that I am not sure how to make the whole thing async...
 
 Good news I have made the add new project part and get all project. I just need to render it somehow, after I figure out props...
+
+Update: the props problem is solved at least at the project and rendering projects. Problem was I used ref([]) and pushed the arrive data in it, which was another array. So I had an array inside an array and then the data. I just needed to push one by one (foreach) to the empty ref and then done.
+
+So now I have a rendered projects and if the user add a new one it renders immediately. Yees. A win for the day
+
+Next: something is wrong with my css style - full screen or smth is set - should not be becaus I cannot scroll down...
+Plus figuring out the isLoggedIn props problem.
+
+**Day 11**
+
+I was working on the Bill-details part. I chose to send 2 different "answer" depend on that we have already uploaded some bills or not. I need to still get use to and get to know proxy. I cannot get out some data from it :D... 

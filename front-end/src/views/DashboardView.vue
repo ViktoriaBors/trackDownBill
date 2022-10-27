@@ -85,8 +85,6 @@ const props = defineProps(['isLoggedIn'])
 console.log(props.isLoggedIn)
 
 const projects= ref([])
-console.log(projects.value)
-
 
 const newProjectName = ref("")
 const newProjectType = ref("")
@@ -114,7 +112,6 @@ fetch("http://localhost:8000/project?email=test@test.com", {
     })
     .then((data) => {
       projects.value.push(data)
-      console.log(projects.value)
       newProjectName.value = ""
       newProjectType.value= ""
       newProjectDescription.value = ""
@@ -132,12 +129,11 @@ fetch("http://localhost:8000/project?email=test@test.com")
       } else return res.json();
     })
     .then((data) => {
-      console.log(data)
       console.log("mount")
       data.forEach(element => {
         projects.value.push(element)
       });
-      console.log(projects.value)
+        console.log(projects)
     })
     .catch((error) => {
         console.log(error)
@@ -155,7 +151,6 @@ onUpdated ( () => {
         })
         .then((data) => {
           console.log("before update")
-          console.log(data)
         })
         .catch((error) => {
             console.log(error)

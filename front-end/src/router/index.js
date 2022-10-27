@@ -4,6 +4,7 @@ import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import DashboardView from '../views/DashboardView.vue'
 import DetailsView from '../views/DetailsView.vue'
+import BillDetailsView from '../views/BillDetailsView.vue'
 
 
 const routes = [
@@ -35,6 +36,12 @@ const routes = [
     path: '/details',
     name: 'details',
     component: DetailsView,
+    props: true,
+  },
+  {
+    path: '/billdetails/:id',
+    name: 'billdetails',
+    component: BillDetailsView,
     props: true,
   },
 ]
